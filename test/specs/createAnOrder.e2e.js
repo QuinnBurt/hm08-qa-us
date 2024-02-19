@@ -3,21 +3,21 @@ const helper = require('../../helper')
 
 describe('Order a taxi', () =>{
     
-    it('should fill the from field', async () =>{
+    it('1. Should fill the from field', async () =>{
         await browser.url(`/`);
         const fromField = await $(page.fromField);
         await fromField.setValue(page.fromAddress);
         await expect(fromField).toHaveValueContaining(page.fromAddress);
     })
 
-    it('should fill the to field', async () =>{
+    it('2. Should fill the to field', async () =>{
         await browser.url(`/`);
         const toField = await $(page.toField);
         await toField.setValue(page.toAddress);
         await expect(toField).toHaveValueContaining(page.toAddress);
     })
 
-    it('should select supportive plan', async () =>{
+    it('3. Should select supportive plan', async () =>{
         await browser.url(`/`);
         await page.fillAddresses();
         const supportiveButton = await helper.getElementByText('Supportive');
@@ -29,7 +29,7 @@ describe('Order a taxi', () =>{
         await expect(suppInfoButton).toBeClickable();
     })
 
-    it('should fill the phone number field', async () =>{
+    it('4. Should fill the phone number field', async () =>{
         await browser.url(`/`);
         await page.fillAddresses();
         const phoneNumber = helper.getPhoneNumber('+1');
@@ -37,15 +37,15 @@ describe('Order a taxi', () =>{
         await expect($(page.phoneNumberField)).toHaveValueContaining(phoneNumber);
     })
 
-    it('should add credit card', async () =>{
+    it('5. Should add credit card', async () =>{
         await browser.url(`/`);
         await page.fillAddresses();
         await page.addCreditCard();
-        //Confirm card is added by checking that
+        //Confirm card is added by checking that a saved card exists
         await expect($('[for=card-1]')).toBeExisting();
     })
     
-    it('should add message to the driver', async () =>{
+    it('6. Should add message to the driver', async () =>{
         await browser.url(`/`);
         await page.fillAddresses();
         //Select message field
@@ -57,7 +57,7 @@ describe('Order a taxi', () =>{
         await expect(messageField).toHaveValueContaining('Test');
     })
     
-    it('should add a blanket and handkerchief to requirements', async () =>{
+    it('7. Should add a blanket and handkerchief to requirements', async () =>{
         await browser.url(`/`);
         await page.fillAddresses();
         //Select the Supportive tariff
@@ -74,7 +74,7 @@ describe('Order a taxi', () =>{
         await expect(bAndHSwitch).toBeEnabled();
     })
 
-    it('should add two ice creams to the requirements', async () =>{
+    it('8. Should add two ice creams to the requirements', async () =>{
         await browser.url(`/`);
         await page.fillAddresses();
         //Select the Supportive tariff
@@ -92,13 +92,13 @@ describe('Order a taxi', () =>{
         await expect(iceCreamCounter).toHaveText('2');
     })
 
-    /*
-    There appears to be a bug on the Urban.Routes server used for this project that causes the order window to only appear EXTREMELY briefly.
-    This happened while using wdio AND while testing manually, on both Google Chrome and Firefox. As a result, the final test sometimes passes and sometimes fails.
-    */
-    it('should display the car search modal', async () =>{
+    it('9. Should display the car search modal', async () =>{
         await browser.url(`/`);
         await page.fillMandatoryFields();
+        //Select the Business tariff
+        const businessButton = await helper.getElementByText('Business');
+        await businessButton.waitForDisplayed();
+        await businessButton.click();
         //Select order button and click
         const orderButton = await $(page.orderButton);
         await orderButton.waitForDisplayed();
