@@ -14,13 +14,21 @@ exports.config = {
         browserName: 'firefox',
         acceptInsecureCerts: true,
         'moz:firefoxOptions': {
-            //args: ['-headless']
+            args: ['-headless']
+        }
+    },
+    {
+        maxInstances: 5,
+        browserName: 'chrome',
+        acceptInsecureCerts: true,
+        'goog:chromeOptions': {
+            args: ['headless', 'disable-gpu']
         }
     }
 ],
     logLevel: 'error',
     bail: 0,
-    baseUrl: 'https://cnt-1c5d75d4-45fb-42db-a804-0906644eae6f.containerhub.tripleten-services.com',
+    baseUrl: 'https://cnt-ea1c81b2-ed54-47bb-a344-695e67c44d88.containerhub.tripleten-services.com',
     waitforTimeout: 6000,
     connectionRetryTimeout: 120000,
     connectionRetryCount: 3,

@@ -2,10 +2,24 @@ Project 8: Automating Tests Relating to Ordering a Taxi from the Urban.Routes Ap
 
 Author: Quinn Burt
 
-Description: This project covers several pieces of functionality for the Urban.Routes App. It tests filling out the from and to fields, selecting the Supportive plan, filling out the phone number field, adding a credit card, adding a message to the driver, adding a blanket and handkerchief to the requirements, adding two ice creams to the requirements, and confirms the car search modal appears when ordering a taxi.
+Description: This project covers several pieces of functionality for the Urban.Routes App. The tests range from filling out a field to ensuring the car search modal displays when an order is placed.
 
-Technologies Used: Primarily WDIO, an awesome package for automating web tests. The tests were performed on Firefox 122.0.1 (64-bit) and Google Chrome Version 121.0.6167.184 (Official Build) (64-bit)
+Setup: Install Node.js and NPM. Deploy the Urban.Routes test server and replace the 'baseUrl' parameter in the wdio.conf.js with the test server url.
 
-Instructions: Using VSCode or the terminal, navigate to the project directory and run the command 'npm run wdio'.
+Configuration: This project is configured to run the tests on Google Chrome and Firefox in headless mode. The url of the test server is included in the config for convenience
+and legibility of code.
 
-Extra: There is currently a bug in Urban.Routes that I found while designing these tests. When attempting to order a taxi with the "Supportive" plan selected, the server responds with a status code of '500' and the error 'UnexpectedError'. As a result, I needed to add a section to my order test (test 9) that selected the business plan before clicking the order button, due to the site saving plan selection in the cookies.
+Running the Tests: To run the tests, simply open the terminal and navigate to the hm08-qa-us directory and run the command "npm run wdio".
+
+Test Cases: 1. Should fill the from field 
+            2. Should fill the to field
+            3. Should select the supportive plan
+            4. Should fill the phone number field
+            5. Should add credit card
+            6. Should add message to driver
+            7. Should add a blanket and handkerchief to the requirements
+            8. Should add two ice creams to the requirements
+            9. Should display the car search modal
+
+Code Style: The project is written in Javascript, primarily utilizing the WebdriverIO package. A page.js file and helper.js file were created to keep track of selectors
+and hold useful functions used in several of the test cases.
